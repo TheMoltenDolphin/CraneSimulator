@@ -5,36 +5,55 @@ using UltimateXR.Manipulation;
 
 public class CraneRotation : MonoBehaviour
 {
+    [Header("Джойстики")]
     [SerializeField] private Transform JoystickUp;
     [SerializeField] private Transform JoystickRotating;
     [SerializeField] private Transform JoystickMovement;
-    [SerializeField] private float JoystickSpeed;
-
+    [SerializeField] private float Speed;
+    
+    [Header("Кабина")]
     [SerializeField] private Transform Cabin;
-    [SerializeField] private Transform Claw;
     [SerializeField] private Transform[] FixPoints;
-    private Transform endPos;
+    private Transform TargetPosCrane;
+
+    [Header("Клешня")]
+    [SerializeField] private Rigidbody Claw;
+    [SerializeField] private Transform[] ClawFixPoints;
+    [SerializeField] private float ClawSpeedUPDOWN;
+    [SerializeField] private float ClawSpeedFRONTBACK;
+    private Transform TargetPosClaw;
 
     private void FixedUpdate()
     {
         #region CraneMovement
-        print(JoystickMovement.transform.localRotation.z);
+      //  print(JoystickUp.rotation.x);
         //if(JoystickMovement.GetComponent<UxrGrabbableObject>().IsBeingGrabbed == true)
         //{
-        if(JoystickMovement.transform.localRotation.z < 0)
+        if(JoystickMovement.localRotation.z < 0)
         {
-            endPos = FixPoints[1];
+            TargetPosCrane = FixPoints[0];
         }
         else
         {
-            endPos = FixPoints[0];
+            TargetPosCrane = FixPoints[1];
         }
-        Cabin.position = Vector3.MoveTowards(Cabin.position, endPos.position, Mathf.Abs(JoystickMovement.transform.localRotation.z) * JoystickSpeed);
+        Cabin.position = Vector3.MoveTowards(Cabin.position, TargetPosCrane.position, Mathf.Abs(JoystickMovement.transform.localRotation.z) * Speed);
         //}
         #endregion
 
         #region ClawMovement
-
+        Claw.velocity = new Vector3(0, JoystickUp.rotation.x * -1 * ClawSpeedUPDOWN, 0);
+        if (JoystickRotating.localRotation.x < 0)
+        {
+            TargetPosClaw = ClawFixPoints[0];
+        }
+        else
+        {
+            TargetPosClaw = ClawFixPoints[1];
+        }
+        Claw.transform.parent.transform.parent.position = Vector3.MoveTowards(Claw.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
         #endregion
+
+
     }
 }
