@@ -81,6 +81,227 @@
       "name": "/actions/mixedreality/in/ExternalCamera",
       "type": "pose",
       "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/joystick_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/joystick2_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/trigger_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/trigger2_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/grip_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button1_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button2_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button3_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button4_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/bumper_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/bumper2_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/back_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/menu_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/thumbcapsense_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/indexcapsense_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/middlecapsense_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/ringcapsense_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/littlecapsense_click_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/joystick_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/joystick2_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/trigger_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/trigger2_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/grip_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button1_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button2_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button3_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/button4_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/bumper_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/bumper2_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/back_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/menu_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/thumbcapsense_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/indexcapsense_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/middlecapsense_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/ringcapsense_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/littlecapsense_touch_boolean",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/grip_vector1",
+      "type": "vector1",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/trigger_vector1",
+      "type": "vector1",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/trigger2_vector1",
+      "type": "vector1",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/joystick_vector2",
+      "type": "vector2",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/joystick2_vector2",
+      "type": "vector2",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/hand_left_skeleton",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/in/hand_right_skeleton",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/ultimatexr/out/hand_haptics",
+      "type": "vibration"
     }
   ],
   "action_sets": [
@@ -98,6 +319,10 @@
     },
     {
       "name": "/actions/mixedreality",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/ultimatexr",
       "usage": "single"
     }
   ],

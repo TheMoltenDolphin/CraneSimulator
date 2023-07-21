@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UltimateXR.Manipulation;
+using Valve.VR;
 
 public class CraneRotation : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class CraneRotation : MonoBehaviour
     [SerializeField] private float ClawSpeedUPDOWN;
     [SerializeField] private float ClawSpeedFRONTBACK;
     private Transform TargetPosClaw;
+
+
+    [SerializeField] private SteamVR_Action_Boolean buttonTouch;
 
     private void FixedUpdate()
     {
@@ -52,6 +56,11 @@ public class CraneRotation : MonoBehaviour
             TargetPosClaw = ClawFixPoints[1];
         }
         Claw.transform.parent.transform.parent.position = Vector3.MoveTowards(Claw.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
+
+        if (JoystickUp.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two)))
+        {
+            print("works!");
+        }
         #endregion
 
 
