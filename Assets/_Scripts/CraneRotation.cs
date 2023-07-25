@@ -69,9 +69,10 @@ public class CraneRotation : MonoBehaviour
         }
         Claw.transform.parent.transform.parent.position = Vector3.MoveTowards(Claw.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
 
-        if (JoystickUp.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two)))
+        if (JoystickUp.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && IsCatched))
         {
             print("works!");
+            ReleaseObject();
         }
         #endregion
 
@@ -97,6 +98,8 @@ public class CraneRotation : MonoBehaviour
     {
         IsCatched = false;
         Destroy(currentObj.GetComponent<FixedJoint>());
+        currentObj.useGravity = true;
+        currentObj = null;
     }
     #endregion
 }

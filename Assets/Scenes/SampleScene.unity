@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.15282771, g: 0.17587762, b: 0.214226, a: 1}
+  m_IndirectSpecularColor: {r: 0.15298213, g: 0.17605522, b: 0.21444136, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -390,6 +390,103 @@ Transform:
   m_Father: {fileID: 1269144354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &214467400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214467401}
+  - component: {fileID: 214467404}
+  - component: {fileID: 214467403}
+  - component: {fileID: 214467402}
+  m_Layer: 0
+  m_Name: Cube (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &214467401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214467400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2003, y: 105, z: 0.1615}
+  m_LocalScale: {x: 0.1, y: 10, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 521881013}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &214467402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214467400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &214467403
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214467400}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &214467404
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214467400}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &281032533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1674,7 @@ Transform:
   - {fileID: 1464433478}
   - {fileID: 364944265}
   - {fileID: 1967838060}
+  - {fileID: 214467401}
   m_Father: {fileID: 995613074}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1983,7 +2081,7 @@ MonoBehaviour:
   _needsTwoHandsToRotate: 0
   _lockedGrabReleaseDistance: 0.4
   _translationResistance: 0
-  _rotationResistance: 0
+  _rotationResistance: 0.3
   _rigidBodySource: {fileID: 0}
   _rigidBodyDynamicOnRelease: 1
   _verticalReleaseMultiplier: 1
@@ -2057,7 +2155,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696913605}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0674d6c19e1e21345a054f4da1a4d5b6, type: 3}
   m_Name: 
@@ -2230,16 +2328,16 @@ MonoBehaviour:
   _translationLimitsMin: {x: 0, y: 0, z: 0}
   _translationLimitsMax: {x: 0, y: 0, z: 0}
   _rotationConstraintMode: 1
-  _rotationAngleLimitsMin: {x: -135, y: 0, z: -45}
-  _rotationAngleLimitsMax: {x: -43, y: 0, z: 45}
+  _rotationAngleLimitsMin: {x: -45, y: 0, z: 45}
+  _rotationAngleLimitsMax: {x: 45, y: 0, z: -45}
   _autoRotationProvider: 0
-  _rotationProvider: 1
+  _rotationProvider: 0
   _rotationLongitudinalAxis:
-    _axis: 2
+    _axis: 0
   _needsTwoHandsToRotate: 0
   _lockedGrabReleaseDistance: 0.4
   _translationResistance: 0
-  _rotationResistance: 0
+  _rotationResistance: 0.3
   _rigidBodySource: {fileID: 0}
   _rigidBodyDynamicOnRelease: 1
   _verticalReleaseMultiplier: 1
@@ -2313,7 +2411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884556688}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0674d6c19e1e21345a054f4da1a4d5b6, type: 3}
   m_Name: 
@@ -3210,7 +3308,7 @@ MonoBehaviour:
   _needsTwoHandsToRotate: 0
   _lockedGrabReleaseDistance: 0.4
   _translationResistance: 0
-  _rotationResistance: 0
+  _rotationResistance: 0.3
   _rigidBodySource: {fileID: 0}
   _rigidBodyDynamicOnRelease: 1
   _verticalReleaseMultiplier: 1
@@ -3271,7 +3369,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633643206}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0674d6c19e1e21345a054f4da1a4d5b6, type: 3}
   m_Name: 
@@ -3504,7 +3602,7 @@ MonoBehaviour:
   JoystickUp: {fileID: 696913604}
   JoystickRotating: {fileID: 884556687}
   JoystickMovement: {fileID: 1633643205}
-  Speed: 0
+  Speed: -0.025
   Cabin: {fileID: 521881013}
   FixPoints:
   - {fileID: 697806518}
@@ -3513,12 +3611,12 @@ MonoBehaviour:
   ClawFixPoints:
   - {fileID: 1284861982}
   - {fileID: 3111410}
-  ClawSpeedUPDOWN: 1.5
-  ClawSpeedFRONTBACK: 0.2
-  buttonTouch:
-    actionPath: /actions/ultimatexr/in/joystick_click_boolean
-    needsReinit: 0
+  ClawSpeedUPDOWN: 1
+  ClawSpeedFRONTBACK: 0.02
   IsCatched: 0
+  buttonTouch:
+    actionPath: /actions/ultimatexr/in/trigger_click_boolean
+    needsReinit: 0
 --- !u!1 &1783072746
 GameObject:
   m_ObjectHideFlags: 0

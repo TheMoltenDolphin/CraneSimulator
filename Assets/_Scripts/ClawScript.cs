@@ -9,6 +9,7 @@ public class ClawScript : MonoBehaviour
         if (collision.gameObject.tag != "Untagged" && !CraneRotation.singleton.IsCatched)
         {
             CraneRotation.singleton.CacthObject(collision.gameObject.GetComponent<Rigidbody>(), gameObject.GetComponent<Rigidbody>());
+            collision.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
     }
 }
