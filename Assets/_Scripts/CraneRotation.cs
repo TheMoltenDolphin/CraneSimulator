@@ -47,18 +47,18 @@ public class CraneRotation : MonoBehaviour
         //{
         if(JoystickMovement.localRotation.z < 0)
         {
-            TargetPosCrane = FixPoints[0];
+            TargetPosCrane = FixPoints[1];
         }
         else
         {
-            TargetPosCrane = FixPoints[1];
+            TargetPosCrane = FixPoints[0];
         }
         Cabin.position = Vector3.MoveTowards(Cabin.position, TargetPosCrane.position, Mathf.Abs(JoystickMovement.transform.localRotation.z) * Speed);
         //}
         #endregion
 
         #region ClawMovement
-        Claw.velocity = new Vector3(0, JoystickUp.rotation.x * -1 * ClawSpeedUPDOWN, 0);
+        Claw.velocity = new Vector3(0, JoystickUp.localRotation.x * -1 * ClawSpeedUPDOWN, 0);
         if (JoystickRotating.localRotation.x < 0)
         {
             TargetPosClaw = ClawFixPoints[0];
@@ -69,8 +69,9 @@ public class CraneRotation : MonoBehaviour
         }
         Claw.transform.parent.transform.parent.position = Vector3.MoveTowards(Claw.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
 
-        if (JoystickUp.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two)))
+        if (JoystickUp.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && IsCatched))
         {
+            ReleaseObject();
             print("works!");
         }
         #endregion
@@ -78,7 +79,7 @@ public class CraneRotation : MonoBehaviour
         #region ClawRotating
         if(JoystickRotating.localRotation.z  != 0)
         {
-            Claw.transform.parent.transform.parent.transform.Rotate(0, JoystickRotating.localRotation.z * ClawSpeedUPDOWN, 0);
+            Claw.transform.parent.transform.parent.transform.Rotate(0, JoystickRotating.localRotation.z * ClawSpeedFRONTBACK, 0);
         }
         #endregion
     }
@@ -88,6 +89,7 @@ public class CraneRotation : MonoBehaviour
     {
         Object.AddComponent<FixedJoint>();
         Object.GetComponent<FixedJoint>().connectedBody = Claw;
+        Object.useGravity = false;
         IsCatched = true;
         currentObj = Object;
     }
@@ -95,6 +97,7 @@ public class CraneRotation : MonoBehaviour
     [ContextMenu("Отпускание!")]
     public void ReleaseObject()
     {
+        currentObj.useGravity = true;
         IsCatched = false;
         Destroy(currentObj.GetComponent<FixedJoint>());
     }

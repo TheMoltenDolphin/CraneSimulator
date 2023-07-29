@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.15282771, g: 0.17587762, b: 0.214226, a: 1}
+  m_IndirectSpecularColor: {r: 0.15292956, g: 0.1759938, b: 0.21436849, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -339,7 +339,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1673,7 +1673,7 @@ Transform:
   m_Children:
   - {fileID: 1729090366}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &607843360
 GameObject:
@@ -1747,14 +1747,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653260035}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.00008726013, z: 0, w: 1}
   m_LocalPosition: {x: -2.727778, y: 6.316798, z: -16.546234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1634162934}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.01, z: 0}
 --- !u!1 &694752800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1863,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1910,15 +1910,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1e6a3b63195084a815d77156daa661, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1e6a3b63195084a815d77156daa661, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1e6a3b63195084a815d77156daa661, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1e6a3b63195084a815d77156daa661, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2353,7 +2353,7 @@ Transform:
   - {fileID: 333511495}
   - {fileID: 1253202988}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044711793
 GameObject:
@@ -3081,7 +3081,7 @@ Transform:
   - {fileID: 2138677393}
   - {fileID: 1207528404}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1633643204
 PrefabInstance:
@@ -3307,7 +3307,7 @@ Transform:
   - {fileID: 653260038}
   - {fileID: 393449701}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1686257107
 GameObject:
@@ -3504,7 +3504,7 @@ MonoBehaviour:
   JoystickUp: {fileID: 696913604}
   JoystickRotating: {fileID: 884556687}
   JoystickMovement: {fileID: 1633643205}
-  Speed: 0
+  Speed: 0.1
   Cabin: {fileID: 521881013}
   FixPoints:
   - {fileID: 697806518}
@@ -3515,10 +3515,10 @@ MonoBehaviour:
   - {fileID: 3111410}
   ClawSpeedUPDOWN: 1.5
   ClawSpeedFRONTBACK: 0.2
+  IsCatched: 0
   buttonTouch:
     actionPath: /actions/ultimatexr/in/joystick_click_boolean
     needsReinit: 0
-  IsCatched: 0
 --- !u!1 &1783072746
 GameObject:
   m_ObjectHideFlags: 0
