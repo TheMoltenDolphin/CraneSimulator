@@ -9,6 +9,9 @@ TagManager:
   - FxTemporaire
   - SamplesInfoPanel
   - Detail
+  - WheelSet
+  - Cart
+  - Vagon
   layers:
   - Default
   - TransparentFX

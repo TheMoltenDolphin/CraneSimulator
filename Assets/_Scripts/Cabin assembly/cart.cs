@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class cart : ParentObjectsOnPlace
+{
+    public int WheelCounter;
+    private bool IsParented;
+    [SerializeField] private FinishedWagon FinishedWagon;
+
+    private void Start()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+    private void FixedUpdate()
+    {
+        if (WheelCounter == 2 && !IsParented)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<MeshCollider>().enabled = true;
+        }
+    }
+    public override void OnReleaseObject(GameObject other)
+    {
+        IsParented = true;
+        FinishedWagon.cartCounter++;
+        base.OnReleaseObject(other);
+    }
+}
