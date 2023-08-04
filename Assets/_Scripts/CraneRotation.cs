@@ -73,6 +73,7 @@ public class CraneRotation : MonoBehaviour
         {
             ReleaseObject();
             print("works!");
+            ReleaseObject();
         }
         #endregion
 
@@ -100,6 +101,7 @@ public class CraneRotation : MonoBehaviour
         currentObj.useGravity = true;
         IsCatched = false;
         Destroy(currentObj.GetComponent<FixedJoint>());
+        currentObj = null;
     }
     #endregion
 }
