@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClawScript : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag != "Untagged" && !CraneRotation.singleton.IsCatched)
         {
