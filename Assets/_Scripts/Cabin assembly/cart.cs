@@ -24,6 +24,15 @@ public class cart : ParentObjectsOnPlace
     {
         IsParented = true;
         FinishedWagon.cartCounter++;
+        if(FinishedWagon.cartCounter == 1)
+        {
+            Taskbar.singleton.PrintText("Собрать вторую тележку");
+        }
+        if(FinishedWagon.cartCounter == 2)
+        {
+            Taskbar.singleton.PrintText("Поставить бочку на тележки");
+        }
         base.OnReleaseObject(other);
+        
     }
 }

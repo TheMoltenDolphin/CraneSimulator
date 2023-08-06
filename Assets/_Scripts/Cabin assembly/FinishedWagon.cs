@@ -15,6 +15,7 @@ public class FinishedWagon : ParentObjectsOnPlace
     {
         if (cartCounter == 2 && !IsParented)
         {
+            Taskbar.singleton.PrintText("Поместить бочку на тележки");
             gameObject.GetComponent<MeshRenderer>().enabled = true;
             gameObject.GetComponent<MeshCollider>().enabled = true;
         }
@@ -29,5 +30,6 @@ public class FinishedWagon : ParentObjectsOnPlace
     void OnVagonDone()
     {
         Debug.Log("Vagon is done!!!");
+        Taskbar.singleton.PrintText("Отправить вагон и начать собирать следующий!");
     }
 }
