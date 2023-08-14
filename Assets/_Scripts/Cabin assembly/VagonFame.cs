@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishedWagon : ParentObjectsOnPlace
+public class VagonFame : ParentObjectsOnPlace
 {
-    public bool IsPlatformPlaced;
+    public float cartCounter;
     private bool IsParented;
+    [SerializeField] private  FinishedWagon FinishedWagon;
     private void Start()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -13,7 +14,7 @@ public class FinishedWagon : ParentObjectsOnPlace
     }
     private void FixedUpdate()
     {
-        if (IsPlatformPlaced && !IsParented)
+        if (cartCounter == 2 && !IsParented)
         {
             Taskbar.singleton.PrintText("Поместить бочку на тележки");
             gameObject.GetComponent<MeshRenderer>().enabled = true;
@@ -24,12 +25,7 @@ public class FinishedWagon : ParentObjectsOnPlace
     {
         base.OnReleaseObject(other);
         IsParented = true;
-        OnVagonDone();
+        FinishedWagon.IsPlatformPlaced = true;
     }
 
-    void OnVagonDone()
-    {
-        Debug.Log("Vagon is done!!!");
-        Taskbar.singleton.PrintText("Отправить вагон и начать собирать следующий!");
-    }
 }

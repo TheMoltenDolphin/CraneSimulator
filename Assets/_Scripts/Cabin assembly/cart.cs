@@ -6,10 +6,13 @@ public class cart : ParentObjectsOnPlace
 {
     public int WheelCounter;
     private bool IsParented;
-    [SerializeField] private FinishedWagon FinishedWagon;
+    private Transform Childs;
+    [SerializeField] private VagonFame VagonFame;
 
     private void Start()
     {
+        Childs = gameObject.transform.GetChild(0);
+        Childs.gameObject.SetActive(false);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
     private void FixedUpdate()
@@ -18,21 +21,24 @@ public class cart : ParentObjectsOnPlace
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
             gameObject.GetComponent<MeshCollider>().enabled = true;
+            Childs.gameObject.SetActive(true);
+
         }
     }
     public override void OnReleaseObject(GameObject other)
     {
         IsParented = true;
-        FinishedWagon.cartCounter++;
-        if(FinishedWagon.cartCounter == 1)
+        VagonFame.cartCounter++;
+        if(VagonFame.cartCounter == 1)
         {
             Taskbar.singleton.PrintText("Собрать вторую тележку");
         }
-        if(FinishedWagon.cartCounter == 2)
+        if(VagonFame.cartCounter == 2)
         {
             Taskbar.singleton.PrintText("Поставить бочку на тележки");
         }
         base.OnReleaseObject(other);
-        
+        Childs.gameObject.SetActive(false);
+
     }
 }
