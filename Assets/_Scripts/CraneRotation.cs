@@ -114,6 +114,8 @@ public class CraneRotation : MonoBehaviour
         Object.AddComponent<FixedJoint>();
         Object.GetComponent<FixedJoint>().connectedBody = Claw;
         Object.useGravity = false;
+        Object.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineAll;
+        Object.GetComponent<Outline>().needsUpdate = true;
         currentObj = Object;
         IsAnimated = false;
     }
@@ -125,10 +127,13 @@ public class CraneRotation : MonoBehaviour
         yield return new WaitForSeconds(ClawAnim.length);
         Particles.Stop();
         currentObj.useGravity = true;
+        currentObj.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineVisible;
+        currentObj.GetComponent<Outline>().needsUpdate = true;
         IsCatched = false;
         Destroy(currentObj.GetComponent<FixedJoint>());
         currentObj = null;
         IsAnimated = false;
+
     }
     [ContextMenu("Отпускание!")]
     public void ReleaseObject()

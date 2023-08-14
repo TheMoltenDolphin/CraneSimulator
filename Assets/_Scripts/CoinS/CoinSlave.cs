@@ -7,13 +7,10 @@ using UnityEngine.SearchService;
 
 public class CoinSlave : MonoBehaviour
 {
-    public string InteractionTag;
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(InteractionTag))
-        {
-            CoinSpawn.singleton.CoinCounter++;
-        }
+        CoinSpawn.singleton.CoinCounter++;
+        gameObject.transform.parent.gameObject.SetActive(false);
+
     }
 }

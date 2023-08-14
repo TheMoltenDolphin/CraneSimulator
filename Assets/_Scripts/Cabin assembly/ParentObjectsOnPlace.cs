@@ -21,6 +21,7 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
         other.gameObject.tag = "Untagged";
         Destroy(other.gameObject.GetComponent<FixedJoint>());
         Destroy(other.gameObject.GetComponent<Rigidbody>());
+        other.GetComponent<Outline>().enabled = false;
         other.transform.position = gameObject.transform.position;
         other.transform.rotation = gameObject.transform.rotation;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
