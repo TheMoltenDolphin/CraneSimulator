@@ -6,13 +6,14 @@ using UltimateXR.Manipulation;
 using Valve.VR;
 using Unity.VisualScripting;
 using UnityEditor;
+using System;
+using System.ComponentModel.Composition;
 
 public class CraneRotation : MonoBehaviour
 {
     public static CraneRotation singleton { get; private set; }
 
     [Header("Джойстики")]
-    [SerializeField] private Transform JoystickUp;
     [SerializeField] private Transform JoystickRotating;
     [SerializeField] private Transform JoystickMovement;
     [SerializeField] private float Speed;
@@ -23,14 +24,11 @@ public class CraneRotation : MonoBehaviour
     private Transform TargetPosCrane;
 
     [Header("Клешня")]
-    [SerializeField] private Rigidbody Claw;
+    public Claw[] ClawList;
     [SerializeField] private Transform[] ClawFixPoints;
-    [SerializeField] private float ClawSpeedUPDOWN;
     [SerializeField] private float ClawSpeedFRONTBACK;
-    [HideInInspector] public bool IsCatched;
     [SerializeField] private SteamVR_Action_Boolean buttonTouch;
     [SerializeField] private AnimationClip ClawAnim;
-    [SerializeField] private ParticleSystem Particles;
 
 
 
@@ -38,7 +36,6 @@ public class CraneRotation : MonoBehaviour
     private bool IsAnimated;
     private Transform TargetPosClaw;
     private bool CatchBtn;
-    private Rigidbody currentObj;
 
     private void Awake()
     {
@@ -65,7 +62,8 @@ public class CraneRotation : MonoBehaviour
             #endregion
 
             #region ClawMovement
-            Claw.velocity = new Vector3(0, JoystickUp.localRotation.x * -1 * ClawSpeedUPDOWN, 0);
+            ClawList[0].ClawRB.velocity = new Vector3(0, ClawList[0].ClawController.localRotation.x * -1 * ClawList[0].ClawSpeedUPDOWN, 0);
+            ClawList[1].ClawRB.velocity = new Vector3(0, ClawList[1].ClawController.localRotation.x * -1 * ClawList[1].ClawSpeedUPDOWN, 0);
             if (JoystickRotating.localRotation.x < 0)
             {
                 TargetPosClaw = ClawFixPoints[0];
@@ -74,72 +72,117 @@ public class CraneRotation : MonoBehaviour
             {
                 TargetPosClaw = ClawFixPoints[1];
             }
-            Claw.transform.parent.transform.parent.position = Vector3.MoveTowards(Claw.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
+            ClawList[0].ClawRB.transform.parent.transform.parent.position = Vector3.MoveTowards(ClawList[0].ClawRB.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
 
-            if (JoystickUp.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && IsCatched))
+            if (ClawList[0].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[0].IsCatched))
             {
-                ReleaseObject();
-                print("works!");
-                ReleaseObject();
+                ReleaseObject(true);
+
+            }
+            else if (ClawList[1].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[1].IsCatched))
+            {
+                ReleaseObject(false);
             }
             #endregion
-
-            #region ClawRotating
-            if (JoystickRotating.localRotation.z != 0)
-            {
-                Claw.transform.parent.transform.parent.transform.Rotate(0, JoystickRotating.localRotation.z * ClawSpeedFRONTBACK, 0);
-            }
         }
-        #endregion
         else
         {
-            Claw.velocity = Vector3.zero;
+            ClawList[0].ClawRB.velocity = Vector3.zero;
+            ClawList[1].ClawRB.velocity = Vector3.zero;
         }
     }
 
     #region ClawCatch
-    public void CacthObject(Rigidbody Object, Rigidbody Claw)
+    public void CacthObject(Rigidbody Object, bool IsBig)
     {
-        IsCatched = true;
-        StartCoroutine(Catcher(Object));
+        if (IsBig)
+        {
+            ClawList[0].IsCatched = true;
+        }
+        else
+        {
+            ClawList[1].IsCatched = true;
+        }
+        StartCoroutine(Catcher(Object, IsBig));
     }
 
-    public IEnumerator Catcher(Rigidbody Object)
+    public IEnumerator Catcher(Rigidbody Object, bool IsBig)
     {
         IsAnimated = true;
-        Particles.Play();
-        Claw.GetComponent<Animator>().SetTrigger("Go!");
-        yield return new WaitForSeconds(ClawAnim.length);
-        Particles.Stop();
-        Object.AddComponent<FixedJoint>();
-        Object.GetComponent<FixedJoint>().connectedBody = Claw;
+        if (IsBig)
+        {
+            ClawList[0].Particles.Play();
+            ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
+            yield return new WaitForSeconds(ClawAnim.length);
+            ClawList[0].Particles.Stop();
+            Object.AddComponent<FixedJoint>();
+            Object.GetComponent<FixedJoint>().connectedBody = ClawList[0].ClawRB;
+            ClawList[0].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
+        }
+        else
+        {
+            ClawList[1].Particles.Play();
+            ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
+            yield return new WaitForSeconds(ClawAnim.length);
+            ClawList[1].Particles.Stop();
+            Object.AddComponent<FixedJoint>();
+            Object.GetComponent<FixedJoint>().connectedBody = ClawList[1].ClawRB;
+            ClawList[1].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
+        }
         Object.useGravity = false;
         Object.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineAll;
         Object.GetComponent<Outline>().needsUpdate = true;
-        currentObj = Object;
         IsAnimated = false;
     }
-    public IEnumerator Releaser()
-    {
+    public IEnumerator Releaser(bool IsBig)
+    {        
         IsAnimated = true;
-        Particles.Play();
-        Claw.GetComponent<Animator>().SetTrigger("Back");
-        yield return new WaitForSeconds(ClawAnim.length);
-        Particles.Stop();
-        currentObj.useGravity = true;
-        currentObj.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineVisible;
-        currentObj.GetComponent<Outline>().needsUpdate = true;
-        IsCatched = false;
-        Destroy(currentObj.GetComponent<FixedJoint>());
-        currentObj = null;
+        if (IsBig)
+        {
+            ClawList[0].Particles.Play();
+            ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Back");
+            yield return new WaitForSeconds(ClawAnim.length);
+            ClawList[0].Particles.Stop();
+            ClawList[0].CatchedObject.useGravity = true;
+            ClawList[0].CatchedObject.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineVisible;
+            ClawList[0].CatchedObject.GetComponent<Outline>().needsUpdate = true;
+            ClawList[0].IsCatched = false;
+            Destroy(ClawList[0].CatchedObject.GetComponent<FixedJoint>());
+            ClawList[0].CatchedObject = null;
+        }
+        else
+        {
+            ClawList[1].Particles.Play();
+            ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Back");
+            yield return new WaitForSeconds(ClawAnim.length);
+            ClawList[1].Particles.Stop();
+            ClawList[1].CatchedObject.useGravity = true;
+            ClawList[1].CatchedObject.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineVisible;
+            ClawList[1].CatchedObject.GetComponent<Outline>().needsUpdate = true;
+            ClawList[1].IsCatched = false;
+            Destroy(ClawList[1].CatchedObject.GetComponent<FixedJoint>());
+            ClawList[1].CatchedObject = null;
+
+        }
         IsAnimated = false;
 
     }
     [ContextMenu("Отпускание!")]
-    public void ReleaseObject()
+    public void ReleaseObject(bool IsBig = false)
     {
-        StartCoroutine(Releaser());
+        StartCoroutine(Releaser(IsBig));
 
     }
     #endregion
+}
+
+[Serializable]
+public class Claw
+{
+    [HideInInspector] public bool IsCatched;
+    public Transform ClawController;
+    public ParticleSystem Particles;
+    public Rigidbody ClawRB;
+    public float ClawSpeedUPDOWN;
+    public Rigidbody CatchedObject;
 }

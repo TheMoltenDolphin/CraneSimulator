@@ -11,7 +11,7 @@ public class CoinSpawn : MonoBehaviour
     public Transform[] CoinSpawners;
     public GameObject CoinPrefab;
     [SerializeField] private int CoinAmount;
-    public int CoinCounter;
+    public float CoinCounter;
     private float time;
     private bool IsStarted;
     [SerializeField] private TextMeshProUGUI TimerText;
@@ -51,8 +51,14 @@ public class CoinSpawn : MonoBehaviour
         if (IsStarted)
         {
             time += Time.fixedDeltaTime;
-            TimerText.text = $"Прошло\n {time.ToString()} секунд ";
+            TimerText.text = $"Прошло\n {Mathf.Round(time)} секунд ";
             CollectedCoinCounter.text = CoinCounter.ToString();
         }
+    }
+    [ContextMenu("Start!!!")]
+    public void StartGame()
+    {
+        IsStarted = true;
+        Taskbar.singleton.PrintText("Собрать первую тележку");
     }
 }
