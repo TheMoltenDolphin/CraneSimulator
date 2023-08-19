@@ -10,7 +10,6 @@ public class CoinSlave : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CoinSpawn.singleton.CoinCounter++;
-        gameObject.transform.parent.gameObject.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 }

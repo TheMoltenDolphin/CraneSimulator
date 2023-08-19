@@ -34,6 +34,7 @@ public class CraneRotation : MonoBehaviour
 
     private bool ReleaseBtn;
     private bool IsAnimated;
+    public bool IsGamePlaying;
     private Transform TargetPosClaw;
     private bool CatchBtn;
 
@@ -43,7 +44,7 @@ public class CraneRotation : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!IsAnimated)
+        if (!IsAnimated && !IsGamePlaying)
         {        
             #region CraneMovement
             //  print(JoystickUp.rotation.x);
@@ -105,7 +106,12 @@ public class CraneRotation : MonoBehaviour
         }
         StartCoroutine(Catcher(Object, IsBig));
     }
+    public void SetDefaultState()
+    {
+        ClawList[1].IsCatched = false;
+        ClawList[0].IsCatched = false;
 
+    }
     public IEnumerator Catcher(Rigidbody Object, bool IsBig)
     {
         IsAnimated = true;

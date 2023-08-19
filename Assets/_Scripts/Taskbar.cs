@@ -16,7 +16,13 @@ public class Taskbar : MonoBehaviour
     {
         singleton = this;
     }
-
+    public void SetTaskbarDefaultState()
+    {
+        for(int i = 0; i < texts.Length; i++)
+        {
+            texts[i].text = null;
+        }
+    }
     public void PrintText(string text)
     {
         
