@@ -35,7 +35,7 @@ public class cart : ParentObjectsOnPlace
         }
         if(VagonFame.cartCounter == 2)
         {
-            Taskbar.singleton.PrintText("Поставить бочку на тележки");
+            Taskbar.singleton.PrintText("Поставить раму на тележки");
         }
         base.OnReleaseObject(other);
         Childs.gameObject.SetActive(false);

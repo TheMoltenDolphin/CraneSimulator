@@ -10,13 +10,27 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Comparetag))
         {   
-            if(other.gameObject.GetComponent<Outline>().OutlineMode == Outline.Mode.OutlineVisible)
+            if(other.gameObject.GetComponent<Outline>().enabled & other.gameObject.GetComponent<Outline>().OutlineWidth < 7)
             {
                 OnReleaseObject(other.gameObject);
                 //other.gameObject.AddComponent<FixedJoint>();
                 //other.gameObject.GetComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
             }
+        }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(Comparetag))
+        {
+            OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(Comparetag))
+        {
+            OutlineManager.singleton.DisableOutline(other.gameObject.GetComponent<Outline>());
         }
     }
     public virtual void OnReleaseObject(GameObject other)

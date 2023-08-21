@@ -16,13 +16,13 @@ public class VagonFame : ParentObjectsOnPlace
     {
         if (cartCounter == 2 && !IsParented)
         {
-            Taskbar.singleton.PrintText("Поместить бочку на тележки");
             gameObject.GetComponent<MeshRenderer>().enabled = true;
             gameObject.GetComponent<MeshCollider>().enabled = true;
         }
     }
     public override void OnReleaseObject(GameObject other)
     {
+        Taskbar.singleton.PrintText("Поместить бочку на раму");
         base.OnReleaseObject(other);
         IsParented = true;
         FinishedWagon.IsPlatformPlaced = true;

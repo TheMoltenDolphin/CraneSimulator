@@ -46,6 +46,7 @@ public class StarterFinisher : MonoBehaviour
         CoinSpawn.singleton.CoinCounter = 0;
         Taskbar.singleton.SetTaskbarDefaultState();
         NewTrain = Instantiate(TrainPrefab, PrefabDest.position, PrefabDest.rotation);
+        OutlineManager.singleton.SetObjects();
     }
     [ContextMenu("FinishGame")]
     public void EndGame()

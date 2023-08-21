@@ -23,6 +23,7 @@ public class ClawScript : MonoBehaviour
                     {
                         CraneRotation.singleton.CacthObject(collision.gameObject.GetComponent<Rigidbody>(), false);
                         collision.gameObject.GetComponent<Rigidbody>().useGravity = false;
+
                     }
                 }
                 else
@@ -47,7 +48,7 @@ public class ClawScript : MonoBehaviour
             }
         }
 
-        else if (collision.gameObject.CompareTag("Untagged"))
+        else if (collision.gameObject.CompareTag("Untagged") && collision.gameObject.layer != 7)
         {
             Taskbar.singleton.PrintError("¬ы столкнулись с посторонней поверхностью!!!");
         }

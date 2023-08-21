@@ -115,24 +115,27 @@ public class CraneRotation : MonoBehaviour
     {
         IsAnimated = true;
         if (IsBig)
-        {
+        {   
+
             ClawList[0].Particles.Play();
             ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
-            yield return new WaitForSeconds(ClawAnim.length);
+            yield return new WaitForSeconds(ClawAnim.length * 0.85f);
             ClawList[0].Particles.Stop();
             Object.AddComponent<FixedJoint>();
             Object.GetComponent<FixedJoint>().connectedBody = ClawList[0].ClawRB;
             ClawList[0].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
+            OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
         }
         else
         {
             ClawList[1].Particles.Play();
             ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
-            yield return new WaitForSeconds(ClawAnim.length);
+            yield return new WaitForSeconds(ClawAnim.length * 0.85f);
             ClawList[1].Particles.Stop();
             Object.AddComponent<FixedJoint>();
             Object.GetComponent<FixedJoint>().connectedBody = ClawList[1].ClawRB;
             ClawList[1].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
+            OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
         }
         Object.useGravity = false;
         OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
@@ -146,7 +149,7 @@ public class CraneRotation : MonoBehaviour
         {
             ClawList[0].Particles.Play();
             ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Back");
-            yield return new WaitForSeconds(ClawAnim.length);
+            yield return new WaitForSeconds(ClawAnim.length * 0.85f);
             ClawList[0].Particles.Stop();
             ClawList[0].CatchedObject.useGravity = true;
             OutlineManager.singleton.SetEmptyOutline(ClawList[0].CatchedObject.GetComponent<Outline>());
@@ -159,7 +162,7 @@ public class CraneRotation : MonoBehaviour
         {
             ClawList[1].Particles.Play();
             ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Back");
-            yield return new WaitForSeconds(ClawAnim.length);
+            yield return new WaitForSeconds(ClawAnim.length * 0.85f);
             ClawList[1].Particles.Stop();
             ClawList[1].CatchedObject.useGravity = true;
             OutlineManager.singleton.SetEmptyOutline(ClawList[1].CatchedObject.GetComponent<Outline>());
