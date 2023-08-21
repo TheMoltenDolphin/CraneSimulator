@@ -16,6 +16,10 @@ public class StarterFinisher : MonoBehaviour
     {
         instance = this;
     }
+
+    private void Start()
+    {
+    }
     [ContextMenu("ResetGame!")]
     public void startGame()
     {
@@ -46,7 +50,10 @@ public class StarterFinisher : MonoBehaviour
     [ContextMenu("FinishGame")]
     public void EndGame()
     {
+        GameObject.FindWithTag("StartBtn").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.Find("HelperCanv").SetActive(false);
         CraneRotation.singleton.IsGamePlaying = false;
     }
+
+    
 }

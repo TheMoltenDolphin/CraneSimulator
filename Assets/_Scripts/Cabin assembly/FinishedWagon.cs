@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class FinishedWagon : ParentObjectsOnPlace
@@ -15,6 +17,7 @@ public class FinishedWagon : ParentObjectsOnPlace
     {
         if (IsPlatformPlaced && !IsParented)
         {
+            IsPlatformPlaced = false;
             Taskbar.singleton.PrintText("Поместить бочку на тележки");
             gameObject.GetComponent<MeshRenderer>().enabled = true;
             gameObject.GetComponent<MeshCollider>().enabled = true;
@@ -30,6 +33,7 @@ public class FinishedWagon : ParentObjectsOnPlace
     void OnVagonDone()
     {
         Debug.Log("Vagon is done!!!");
+        GameObject.FindWithTag("FinishBtn").transform.GetChild(0).gameObject.SetActive(true);
         Taskbar.singleton.PrintText("Отправить вагон и начать собирать следующий!");
     }
 }

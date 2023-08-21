@@ -27,7 +27,7 @@ public class CraneRotation : MonoBehaviour
     public Claw[] ClawList;
     [SerializeField] private Transform[] ClawFixPoints;
     [SerializeField] private float ClawSpeedFRONTBACK;
-    [SerializeField] private SteamVR_Action_Boolean buttonTouch;
+    public SteamVR_Action_Boolean buttonTouch;
     [SerializeField] private AnimationClip ClawAnim;
 
 
@@ -36,7 +36,7 @@ public class CraneRotation : MonoBehaviour
     private bool IsAnimated;
     public bool IsGamePlaying;
     private Transform TargetPosClaw;
-    private bool CatchBtn;
+    public bool CatchReleaseBtn;
 
     private void Awake()
     {
@@ -44,13 +44,13 @@ public class CraneRotation : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!IsAnimated && !IsGamePlaying)
-        {        
+        if (!IsAnimated && IsGamePlaying)
+        {
             #region CraneMovement
-            //  print(JoystickUp.rotation.x);
-            //if(JoystickMovement.GetComponent<UxrGrabbableObject>().IsBeingGrabbed == true)
-            //{
-            if (JoystickMovement.localRotation.z < 0)
+              print(JoystickRotating.localRotation.x);
+            if (JoystickMovement.GetComponent<UxrGrabbableObject>().IsBeingGrabbed == true)
+            {
+            if (JoystickMovement.localRotation.x > 0)
             {
                 TargetPosCrane = FixPoints[1];
             }
@@ -58,14 +58,14 @@ public class CraneRotation : MonoBehaviour
             {
                 TargetPosCrane = FixPoints[0];
             }
-            Cabin.position = Vector3.MoveTowards(Cabin.position, TargetPosCrane.position, Mathf.Abs(JoystickMovement.transform.localRotation.z) * Speed);
-            //}
+            Cabin.position = Vector3.MoveTowards(Cabin.position, TargetPosCrane.position, Mathf.Abs(JoystickMovement.transform.localRotation.x) * Speed);
+            }
             #endregion
 
             #region ClawMovement
             ClawList[0].ClawRB.velocity = new Vector3(0, ClawList[0].ClawController.localRotation.x * -1 * ClawList[0].ClawSpeedUPDOWN, 0);
             ClawList[1].ClawRB.velocity = new Vector3(0, ClawList[1].ClawController.localRotation.x * -1 * ClawList[1].ClawSpeedUPDOWN, 0);
-            if (JoystickRotating.localRotation.x < 0)
+            if (JoystickRotating.localRotation.x > 0)
             {
                 TargetPosClaw = ClawFixPoints[0];
             }
@@ -78,7 +78,6 @@ public class CraneRotation : MonoBehaviour
             if (ClawList[0].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[0].IsCatched))
             {
                 ReleaseObject(true);
-
             }
             else if (ClawList[1].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[1].IsCatched))
             {
@@ -136,7 +135,7 @@ public class CraneRotation : MonoBehaviour
             ClawList[1].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
         }
         Object.useGravity = false;
-        Object.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineAll;
+        OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
         Object.GetComponent<Outline>().needsUpdate = true;
         IsAnimated = false;
     }
@@ -150,7 +149,7 @@ public class CraneRotation : MonoBehaviour
             yield return new WaitForSeconds(ClawAnim.length);
             ClawList[0].Particles.Stop();
             ClawList[0].CatchedObject.useGravity = true;
-            ClawList[0].CatchedObject.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineVisible;
+            OutlineManager.singleton.SetEmptyOutline(ClawList[0].CatchedObject.GetComponent<Outline>());
             ClawList[0].CatchedObject.GetComponent<Outline>().needsUpdate = true;
             ClawList[0].IsCatched = false;
             Destroy(ClawList[0].CatchedObject.GetComponent<FixedJoint>());
@@ -163,7 +162,7 @@ public class CraneRotation : MonoBehaviour
             yield return new WaitForSeconds(ClawAnim.length);
             ClawList[1].Particles.Stop();
             ClawList[1].CatchedObject.useGravity = true;
-            ClawList[1].CatchedObject.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineVisible;
+            OutlineManager.singleton.SetEmptyOutline(ClawList[1].CatchedObject.GetComponent<Outline>());
             ClawList[1].CatchedObject.GetComponent<Outline>().needsUpdate = true;
             ClawList[1].IsCatched = false;
             Destroy(ClawList[1].CatchedObject.GetComponent<FixedJoint>());
@@ -185,7 +184,7 @@ public class CraneRotation : MonoBehaviour
 [Serializable]
 public class Claw
 {
-    [HideInInspector] public bool IsCatched;
+    public bool IsCatched;
     public Transform ClawController;
     public ParticleSystem Particles;
     public Rigidbody ClawRB;
