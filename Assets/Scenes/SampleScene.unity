@@ -213,12 +213,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47021676}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10016496, y: -0.88163424, z: 0.029067501}
+  m_LocalPosition: {x: 0.10016496, y: -0.88163424, z: 0}
   m_LocalScale: {x: 3.5728111, y: 0.5719051, z: 2.6437826}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 126800382}
   - {fileID: 1102316409}
+  - {fileID: 2054820919}
+  - {fileID: 1024471734}
+  - {fileID: 1784528037}
   m_Father: {fileID: 1686257108}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -314,6 +317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBig: 1
+  CartPivot: {fileID: 2054820919}
+  WheelPivot: {fileID: 0}
 --- !u!95 &47021684
 Animator:
   serializedVersion: 4
@@ -818,6 +823,37 @@ Transform:
   - {fileID: 615157466}
   m_Father: {fileID: 4178799570029933595}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &181943044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 181943045}
+  m_Layer: 6
+  m_Name: WheelPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &181943045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181943044}
+  m_LocalRotation: {x: -3.1086245e-15, y: 0.7071069, z: 0.000000010536711, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: -5.9908376, z: 0}
+  m_LocalScale: {x: 0.71432817, y: 9.2894745, z: 0.71441835}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1271663522}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &188778080
 MeshCollider:
@@ -5128,6 +5164,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -745928167409971724, guid: c7d07c0210562ac4fbf2c966e3737313, type: 3}
+--- !u!1 &1024471733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024471734}
+  m_Layer: 6
+  m_Name: CanisterPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1024471734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024471733}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0.3229999, y: -16.289995, z: 0.010000746}
+  m_LocalScale: {x: 0.5521379, y: 7.178251, z: 0.55207145}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47021677}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1026700930
 GameObject:
   m_ObjectHideFlags: 0
@@ -7387,6 +7454,7 @@ Transform:
   m_Children:
   - {fileID: 586363849}
   - {fileID: 453867027}
+  - {fileID: 181943045}
   m_Father: {fileID: 1344415676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7436,6 +7504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBig: 0
+  CartPivot: {fileID: 0}
+  WheelPivot: {fileID: 181943045}
 --- !u!54 &1271663526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8869,6 +8939,37 @@ MonoBehaviour:
   ClawAnim: {fileID: 7400000, guid: afef6947fe85a574b8b1ccbf8294c65a, type: 2}
   IsGamePlaying: 0
   CatchReleaseBtn: 0
+--- !u!1 &1784528036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784528037}
+  m_Layer: 6
+  m_Name: ScepjkaPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784528037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784528036}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: -10.540002, z: 0}
+  m_LocalScale: {x: 0.5520665, y: 7.1793466, z: 0.55213624}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47021677}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1805320262
 GameObject:
   m_ObjectHideFlags: 0
@@ -9326,6 +9427,37 @@ MonoBehaviour:
   _interactionTypeOnAutoEnable: 0
   _fingerTipMinHoverDistance: 0.05
   _dragThreshold: 40
+--- !u!1 &2054820918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2054820919}
+  m_Layer: 6
+  m_Name: CartPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2054820919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054820918}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: -3.7299972, z: 0}
+  m_LocalScale: {x: 0.5520665, y: 7.1793466, z: 0.55213624}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47021677}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2086764105
 GameObject:
   m_ObjectHideFlags: 0

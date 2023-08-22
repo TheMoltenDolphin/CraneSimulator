@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UltimateXR.Extensions.Unity;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClawScript : MonoBehaviour
 {
     [SerializeField] private bool IsBig;
+    [SerializeField] private Transform CartPivot;
+    [SerializeField] private Transform WheelPivot;
+
+
     bool stateup;
     bool Go;
     private void OnTriggerStay(Collider collision)
@@ -21,9 +27,9 @@ public class ClawScript : MonoBehaviour
                 {
                     if (!CraneRotation.singleton.ClawList[1].IsCatched)
                     {
+                        collision.gameObject.transform.position = WheelPivot.position;
                         CraneRotation.singleton.CacthObject(collision.gameObject.GetComponent<Rigidbody>(), false);
                         collision.gameObject.GetComponent<Rigidbody>().useGravity = false;
-
                     }
                 }
                 else
@@ -36,7 +42,11 @@ public class ClawScript : MonoBehaviour
                 if (!collision.gameObject.CompareTag("WheelSet"))
                 {
                     if (!CraneRotation.singleton.ClawList[0].IsCatched)
-                    {
+                    {   
+                        if(collision.gameObject.CompareTag("Cart"))
+                        {
+                            collision.gameObject.transform.position = CartPivot.position;
+                        }
                         CraneRotation.singleton.CacthObject(collision.gameObject.GetComponent<Rigidbody>(), true);
                         collision.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     }
