@@ -32,6 +32,7 @@ public class Taskbar : MonoBehaviour
             texts[i].text = texts[i - 1].text;
         }
         texts[0].text = '-' + text;
+        AudioManager.singleton.PlayAudio("Taskbar");
     }
 
     public void PrintError(string ErrorText)

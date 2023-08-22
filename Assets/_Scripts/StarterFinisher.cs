@@ -39,6 +39,7 @@ public class StarterFinisher : MonoBehaviour
             Destroy(NewTrain);
         }
         GameObject.Find("HelperCanv").SetActive(true);
+        AudioManager.singleton.PlayAudio("LongSteam");
         yield return new WaitForSeconds(BigSmoke.main.duration / 2);
         for(int i = 0; i < coins.Length; i++)
         {

@@ -42,6 +42,7 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
         other.transform.position = gameObject.transform.position;
         other.transform.rotation = gameObject.transform.rotation;
         other.gameObject.layer = 9;
+        AudioManager.singleton.PlayAudio("Coin");
         gameObject.SetActive(false);
 
     }

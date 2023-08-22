@@ -58,6 +58,5 @@ public class CoinSpawn : MonoBehaviour
     public void StartGame()
     {
         IsPlaying = true;
-        Taskbar.singleton.PrintText("Собрать первую тележку");
     }
 }

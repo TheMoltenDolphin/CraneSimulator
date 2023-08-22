@@ -22,6 +22,7 @@ public class CraneRotation : MonoBehaviour
     [SerializeField] private Transform Cabin;
     [SerializeField] private Transform[] FixPoints;
     private Transform TargetPosCrane;
+    [SerializeField] private AudioSource engineSound;
 
     [Header("Клешня")]
     public Claw[] ClawList;
@@ -47,18 +48,19 @@ public class CraneRotation : MonoBehaviour
         if (!IsAnimated && IsGamePlaying)
         {
             #region CraneMovement
-              print(JoystickRotating.localRotation.x);
+            print(JoystickMovement.transform.localRotation.x);
             if (JoystickMovement.GetComponent<UxrGrabbableObject>().IsBeingGrabbed == true)
             {
-            if (JoystickMovement.localRotation.x > 0)
-            {
-                TargetPosCrane = FixPoints[1];
-            }
-            else
-            {
-                TargetPosCrane = FixPoints[0];
-            }
-            Cabin.position = Vector3.MoveTowards(Cabin.position, TargetPosCrane.position, Mathf.Abs(JoystickMovement.transform.localRotation.x) * Speed);
+                if (JoystickMovement.localRotation.x > 0)
+                {
+                    TargetPosCrane = FixPoints[1];
+                }
+                else
+                {
+                    TargetPosCrane = FixPoints[0];
+                }
+                engineSound.volume = Mathf.Abs(JoystickMovement.transform.localRotation.x) / 2;
+                Cabin.position = Vector3.MoveTowards(Cabin.position, TargetPosCrane.position, Mathf.Abs(JoystickMovement.transform.localRotation.x) * Speed);
             }
             #endregion
 
@@ -119,7 +121,9 @@ public class CraneRotation : MonoBehaviour
 
             ClawList[0].Particles.Play();
             ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
-            yield return new WaitForSeconds(ClawAnim.length * 0.85f);
+            AudioManager.singleton.PlayAudio("Steam");
+            AudioManager.singleton.PlayAudio("Molot");
+            yield return new WaitForSeconds(ClawAnim.length * 0.8f);
             ClawList[0].Particles.Stop();
             Object.AddComponent<FixedJoint>();
             Object.GetComponent<FixedJoint>().connectedBody = ClawList[0].ClawRB;
@@ -149,6 +153,7 @@ public class CraneRotation : MonoBehaviour
         {
             ClawList[0].Particles.Play();
             ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Back");
+            AudioManager.singleton.PlayAudio("Steam");
             yield return new WaitForSeconds(ClawAnim.length * 0.85f);
             ClawList[0].Particles.Stop();
             ClawList[0].CatchedObject.useGravity = true;
