@@ -48,7 +48,7 @@ public class ClawScript : MonoBehaviour
             }
         }
 
-        else if (collision.gameObject.CompareTag("Untagged") && collision.gameObject.layer != 7)
+        else if (collision.gameObject.CompareTag("Untagged") && (collision.gameObject.layer != 7 | collision.gameObject.layer != 9))
         {
             Taskbar.singleton.PrintError("¬ы столкнулись с посторонней поверхностью!!!");
         }

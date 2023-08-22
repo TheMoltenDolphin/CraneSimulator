@@ -22,6 +22,7 @@ public class Taskbar : MonoBehaviour
         {
             texts[i].text = null;
         }
+        PrintText("Собрать первую тележку");
     }
     public void PrintText(string text)
     {

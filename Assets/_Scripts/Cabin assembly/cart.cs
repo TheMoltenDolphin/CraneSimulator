@@ -20,7 +20,7 @@ public class cart : ParentObjectsOnPlace
         if (WheelCounter == 2 && !IsParented)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<MeshCollider>().enabled = true;
+            gameObject.GetComponent<Collider>().enabled = true;
             Childs.gameObject.SetActive(true);
 
         }

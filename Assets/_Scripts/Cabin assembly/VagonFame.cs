@@ -17,7 +17,7 @@ public class VagonFame : ParentObjectsOnPlace
         if (cartCounter == 2 && !IsParented)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<MeshCollider>().enabled = true;
+            gameObject.GetComponent<Collider>().enabled = true;
         }
     }
     public override void OnReleaseObject(GameObject other)

@@ -30,7 +30,7 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Comparetag))
         {
-            OutlineManager.singleton.DisableOutline(other.gameObject.GetComponent<Outline>());
+            OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
         }
     }
     public virtual void OnReleaseObject(GameObject other)
@@ -38,11 +38,11 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
         other.gameObject.tag = "Untagged";
         Destroy(other.gameObject.GetComponent<FixedJoint>());
         Destroy(other.gameObject.GetComponent<Rigidbody>());
-        Destroy(other.gameObject.GetComponent<Collider>());
         OutlineManager.singleton.DisableOutline(other.GetComponent<Outline>());
         other.transform.position = gameObject.transform.position;
         other.transform.rotation = gameObject.transform.rotation;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<MeshCollider>().enabled = false;
+        other.gameObject.layer = 9;
+        gameObject.SetActive(false);
+
     }
 }

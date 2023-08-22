@@ -53,26 +53,30 @@ public class OutlineManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!cart && (cartScript[0].WheelCounter == 2 | cartScript[1].WheelCounter == 2))
+        if (wheels[0] != null)
         {
-            for(int i = 0; i < carts.Length; i++)
+            if(!cart && (cartScript[0].WheelCounter == 2 | cartScript[1].WheelCounter == 2))
             {
-                SetEmptyOutline(carts[i].GetComponent<Outline>());
+                for(int i = 0; i < carts.Length; i++)
+                {
+                    SetEmptyOutline(carts[i].GetComponent<Outline>());
+                }
+                cart = true;
             }
-            cart = true;
+
+            if(!connector & connectorScript.cartCounter == 2)
+            {
+                connector = true;
+                SetEmptyOutline(connectorObj.GetComponent<Outline>());
+            }
+
+            if(!canister && cisternScript.IsPlatformPlaced)
+            {
+                canister = true;
+                SetEmptyOutline(cistern.GetComponent<Outline>());
+            }
         }
 
-        if(!connector & connectorScript.cartCounter == 2)
-        {
-            connector = true;
-            SetEmptyOutline(connectorObj.GetComponent<Outline>());
-        }
-
-        if(!canister && cisternScript.IsPlatformPlaced)
-        {
-            canister = true;
-            SetEmptyOutline(cistern.GetComponent<Outline>());
-        }
     }
 
     private void Awake()

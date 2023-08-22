@@ -20,7 +20,7 @@ public class FinishedWagon : ParentObjectsOnPlace
             IsPlatformPlaced = false;
             Taskbar.singleton.PrintText("Поместить бочку на тележки");
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<MeshCollider>().enabled = true;
+            gameObject.GetComponent<Collider>().enabled = true;
         }
     }
     public override void OnReleaseObject(GameObject other)
