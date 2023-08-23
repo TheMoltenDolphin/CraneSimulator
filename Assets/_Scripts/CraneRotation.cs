@@ -25,6 +25,7 @@ public class CraneRotation : MonoBehaviour
     [SerializeField] private AudioSource engineSound;
 
     [Header("Клешня")]
+    [SerializeField] private Transform ClawParent;
     public Claw[] ClawList;
     [SerializeField] private Transform[] ClawFixPoints;
     [SerializeField] private float ClawSpeedFRONTBACK;
@@ -75,7 +76,7 @@ public class CraneRotation : MonoBehaviour
             {
                 TargetPosClaw = ClawFixPoints[1];
             }
-            ClawList[0].ClawRB.transform.parent.transform.parent.position = Vector3.MoveTowards(ClawList[0].ClawRB.transform.parent.transform.parent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
+            ClawParent.position = Vector3.MoveTowards(ClawParent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
 
             if (ClawList[0].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[0].IsCatched))
             {
