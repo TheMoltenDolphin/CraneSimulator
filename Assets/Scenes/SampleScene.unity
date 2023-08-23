@@ -7135,6 +7135,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0674d6c19e1e21345a054f4da1a4d5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1158306719
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.720645
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.61
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.3878317
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6087936
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7933287
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 104.995
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4274015507916752025, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 933dd4de11bd74040858f9a55c538fc2, type: 2}
+    - target: {fileID: -1398038663907667000, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 933dd4de11bd74040858f9a55c538fc2, type: 2}
+    - target: {fileID: 919132149155446097, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_Name
+      value: Cisterna_Tsepi
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873489268658811428, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 933dd4de11bd74040858f9a55c538fc2, type: 2}
+    - target: {fileID: 4551740821115344429, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 933dd4de11bd74040858f9a55c538fc2, type: 2}
+    - target: {fileID: 8521902485874960664, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 303c657837cc409479cddaec59d527eb, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b419367fbf001aa4ea9d142d2059bf7f, type: 3}
 --- !u!1 &1171309174
 GameObject:
   m_ObjectHideFlags: 0
