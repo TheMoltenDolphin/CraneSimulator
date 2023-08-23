@@ -8,12 +8,11 @@ using TMPro;
 public class CoinSpawn : MonoBehaviour
 {
     public static CoinSpawn singleton;
-    public Transform[] CoinSpawners;
     public GameObject CoinPrefab;
     [SerializeField] private int CoinAmount;
     public float CoinCounter;
     private float time;
-    private bool IsStarted;
+    [HideInInspector]public bool IsPlaying;
     [SerializeField] private TextMeshProUGUI TimerText;
     [SerializeField] private TextMeshProUGUI CollectedCoinCounter;
 
@@ -48,7 +47,7 @@ public class CoinSpawn : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsStarted)
+        if (IsPlaying)
         {
             time += Time.fixedDeltaTime;
             TimerText.text = $"Прошло\n {Mathf.Round(time)} секунд ";
@@ -58,7 +57,6 @@ public class CoinSpawn : MonoBehaviour
     [ContextMenu("Start!!!")]
     public void StartGame()
     {
-        IsStarted = true;
-        Taskbar.singleton.PrintText("Собрать первую тележку");
+        IsPlaying = true;
     }
 }

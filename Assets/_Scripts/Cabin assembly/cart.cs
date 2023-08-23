@@ -20,7 +20,7 @@ public class cart : ParentObjectsOnPlace
         if (WheelCounter == 2 && !IsParented)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<MeshCollider>().enabled = true;
+            gameObject.GetComponent<Collider>().enabled = true;
             Childs.gameObject.SetActive(true);
 
         }
@@ -35,7 +35,7 @@ public class cart : ParentObjectsOnPlace
         }
         if(VagonFame.cartCounter == 2)
         {
-            Taskbar.singleton.PrintText("Поставить бочку на тележки");
+            Taskbar.singleton.PrintText("Поставить раму на тележки");
         }
         base.OnReleaseObject(other);
         Childs.gameObject.SetActive(false);

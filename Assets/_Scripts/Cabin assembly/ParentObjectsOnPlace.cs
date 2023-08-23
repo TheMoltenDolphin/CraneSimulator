@@ -10,21 +10,40 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Comparetag))
         {   
-            OnReleaseObject(other.gameObject);
-            //other.gameObject.AddComponent<FixedJoint>();
-            //other.gameObject.GetComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
+            if(other.gameObject.GetComponent<Outline>().enabled & other.gameObject.GetComponent<Outline>().OutlineWidth < 7)
+            {
+                OnReleaseObject(other.gameObject);
+                //other.gameObject.AddComponent<FixedJoint>();
+                //other.gameObject.GetComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
+            }
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(Comparetag))
+        {
+            OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(Comparetag))
+        {
+            OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
+        }
+    }
     public virtual void OnReleaseObject(GameObject other)
     {
         other.gameObject.tag = "Untagged";
         Destroy(other.gameObject.GetComponent<FixedJoint>());
         Destroy(other.gameObject.GetComponent<Rigidbody>());
-        other.GetComponent<Outline>().enabled = false;
+        OutlineManager.singleton.DisableOutline(other.GetComponent<Outline>());
         other.transform.position = gameObject.transform.position;
         other.transform.rotation = gameObject.transform.rotation;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<MeshCollider>().enabled = false;
+        other.gameObject.layer = 9;
+        AudioManager.singleton.PlayAudio("Coin");
+        gameObject.SetActive(false);
+
     }
 }

@@ -9,8 +9,8 @@ public class CoinSlave : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        AudioManager.singleton.PlayAudio("Coin");
         CoinSpawn.singleton.CoinCounter++;
-        gameObject.transform.parent.gameObject.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 }

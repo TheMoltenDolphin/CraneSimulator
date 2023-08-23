@@ -13,6 +13,8 @@ TagManager:
   - Cart
   - Vagon
   - Platform
+  - FinishBtn
+  - StartBtn
   layers:
   - Default
   - TransparentFX
@@ -21,9 +23,9 @@ TagManager:
   - Water
   - UI
   - Resources
-  - 
-  - 
-  - 
+  - IgnoreOther
+  - Claw
+  - Ground
   - 
   - 
   - 
