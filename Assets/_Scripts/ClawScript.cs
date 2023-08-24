@@ -50,17 +50,6 @@ public class ClawScript : MonoBehaviour
                     if (!CraneRotation.singleton.ClawList[0].IsCatched)
                     {
                         CraneRotation.singleton.IsAnimated = true;
-                        if (collision.gameObject.CompareTag("Cart"))
-                        {
-
-                            collision.GetComponent<Rigidbody>().isKinematic = true;
-                            collision.gameObject.transform.position = CartPivot.position;
-                            collision.gameObject.transform.rotation = CartPivot.rotation;
-                            collision.gameObject.transform.SetParent(WheelPivot);
-                            collision.gameObject.AddComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
-                            collision.GetComponent<Rigidbody>().isKinematic = false;
-                            collision.gameObject.transform.position = CartPivot.position;
-                        }
                         CraneRotation.singleton.CacthObject(collision.gameObject.GetComponent<Rigidbody>(), true);
                         collision.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     }

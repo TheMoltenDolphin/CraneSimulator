@@ -8,6 +8,8 @@ using Unity.VisualScripting;
 using UnityEditor;
 using System;
 using System.ComponentModel.Composition;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
 
 public class CraneRotation : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class CraneRotation : MonoBehaviour
     public Claw[] ClawList;
     [SerializeField] private Transform[] ClawFixPoints;
     [SerializeField] private float ClawSpeedFRONTBACK;
+    [SerializeField] private AudioSource ClawFrontBack;
+    [SerializeField] private AudioSource ClawUpDown;
     public SteamVR_Action_Boolean buttonTouch;
     [SerializeField] private AnimationClip ClawAnim;
 
@@ -65,6 +69,7 @@ public class CraneRotation : MonoBehaviour
 
             #region ClawMovement
             ClawList[0].ClawRB.velocity = new Vector3(0, ClawList[0].ClawController.localRotation.x * -1 * ClawList[0].ClawSpeedUPDOWN, 0);
+            ClawUpDown.volume = Mathf.Max(ClawList[0].ClawController.localRotation.x, ClawList[1].ClawController.localRotation.x) * 2;
             ClawList[1].ClawRB.velocity = new Vector3(0, ClawList[1].ClawController.localRotation.x * -1 * ClawList[1].ClawSpeedUPDOWN, 0);
             if (JoystickRotating.localRotation.x > 0)
             {
@@ -75,7 +80,7 @@ public class CraneRotation : MonoBehaviour
                 TargetPosClaw = ClawFixPoints[1];
             }
             ClawParent.position = Vector3.MoveTowards(ClawParent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
-
+            ClawFrontBack.volume = JoystickRotating.localRotation.x * 2;
             if (ClawList[0].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[0].IsCatched))
             {
                 ReleaseObject(true);
