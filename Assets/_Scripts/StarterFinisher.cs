@@ -19,7 +19,7 @@ public class StarterFinisher : MonoBehaviour
 
     private void Start()
     {
-        startGame();
+      //  startGame();
     }
     [ContextMenu("ResetGame!")]
     public void startGame()
