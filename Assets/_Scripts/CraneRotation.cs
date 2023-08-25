@@ -43,6 +43,7 @@ public class CraneRotation : MonoBehaviour
     public bool IsGamePlaying;
     private Transform TargetPosClaw;
     public bool CatchReleaseBtn;
+    public bool IsCollided;
     private void Awake()
     {
         singleton = this;
@@ -52,7 +53,7 @@ public class CraneRotation : MonoBehaviour
         if (!IsAnimated && IsGamePlaying)
         {
             #region CraneMovement
-            if (JoystickMovement.GetComponent<UxrGrabbableObject>().IsBeingGrabbed == true)
+            if (JoystickMovement.GetComponent<UxrGrabbableObject>().IsBeingGrabbed == true && !IsCollided)
             {
                 if (JoystickMovement.localRotation.x > 0)
                 {
@@ -69,18 +70,21 @@ public class CraneRotation : MonoBehaviour
 
             #region ClawMovement
             ClawList[0].ClawRB.velocity = new Vector3(0, ClawList[0].ClawController.localRotation.x * -1 * ClawList[0].ClawSpeedUPDOWN, 0);
-            ClawUpDown.volume = Mathf.Max(ClawList[0].ClawController.localRotation.x, ClawList[1].ClawController.localRotation.x) * 2;
+            ClawUpDown.volume = Mathf.Max(Mathf.Abs(ClawList[0].ClawController.localRotation.x), Mathf.Abs(ClawList[1].ClawController.localRotation.x)) * 2;
             ClawList[1].ClawRB.velocity = new Vector3(0, ClawList[1].ClawController.localRotation.x * -1 * ClawList[1].ClawSpeedUPDOWN, 0);
-            if (JoystickRotating.localRotation.x > 0)
+            if (!IsCollided)
             {
-                TargetPosClaw = ClawFixPoints[0];
+                if (JoystickRotating.localRotation.x > 0)
+                {
+                    TargetPosClaw = ClawFixPoints[0];
+                }
+                else
+                {
+                    TargetPosClaw = ClawFixPoints[1];
+                }
+                ClawParent.position = Vector3.MoveTowards(ClawParent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
             }
-            else
-            {
-                TargetPosClaw = ClawFixPoints[1];
-            }
-            ClawParent.position = Vector3.MoveTowards(ClawParent.position, TargetPosClaw.position, Mathf.Abs(JoystickRotating.localRotation.x) * ClawSpeedFRONTBACK);
-            ClawFrontBack.volume = JoystickRotating.localRotation.x * 2;
+            ClawFrontBack.volume = Mathf.Abs(JoystickRotating.localRotation.x) * 2;
             if (ClawList[0].ClawController.GetComponent<UxrGrabbableObject>().IsBeingGrabbed & (buttonTouch.stateDown | OVRInput.Get(OVRInput.Button.Two) && ClawList[0].IsCatched))
             {
                 ReleaseObject(true);
@@ -124,25 +128,25 @@ public class CraneRotation : MonoBehaviour
         IsAnimated = true;
         if (IsBig)
         {
-            ClawList[0].IsColliding = false;
             ClawList[0].Particles.Play();
-            ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
+            //ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
             yield return new WaitForSeconds(ClawAnim.length * 0.8f);
-            // Object.AddComponent<FixedJoint>();
-            //Object.GetComponent<FixedJoint>().connectedBody = ClawList[0].ClawRB;
+            Object.AddComponent<FixedJoint>();
+            Object.GetComponent<FixedJoint>().connectedBody = ClawList[0].ClawRB;
             ClawList[0].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
             OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
         }
         else
         {
-            ClawList[1].IsColliding = false;
             ClawList[1].Particles.Play();
-            ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
+            //ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
+            Object.AddComponent<FixedJoint>();
+            Object.GetComponent<FixedJoint>().connectedBody = ClawList[1].ClawRB;
             yield return new WaitForSeconds(ClawAnim.length * 0.8f);
-           // Object.AddComponent<FixedJoint>();
-           // Object.GetComponent<FixedJoint>().connectedBody = ClawList[1].ClawRB;
             ClawList[1].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
             OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
+            Object.isKinematic = false;
+
         }
         Object.useGravity = false;
         OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
@@ -155,7 +159,7 @@ public class CraneRotation : MonoBehaviour
         if (IsBig)
         {
             ClawList[0].Particles.Play();
-            ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Back");
+            //ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Back");
             AudioManager.singleton.PlayAudio("Steam");
             yield return new WaitForSeconds(ClawAnim.length * 0.8f);
             ClawList[0].CatchedObject.useGravity = true;
@@ -169,7 +173,8 @@ public class CraneRotation : MonoBehaviour
         else
         {
             ClawList[1].Particles.Play();
-            ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Back");
+            //ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Back");
+            AudioManager.singleton.PlayAudio("Steam");
             yield return new WaitForSeconds(ClawAnim.length * 0.85f);
             ClawList[1].CatchedObject.useGravity = true;
             OutlineManager.singleton.SetEmptyOutline(ClawList[1].CatchedObject.GetComponent<Outline>());
@@ -178,6 +183,7 @@ public class CraneRotation : MonoBehaviour
             Destroy(ClawList[1].CatchedObject.GetComponent<FixedJoint>());
             ClawList[1].CatchedObject.transform.parent = null;
             ClawList[1].CatchedObject = null;
+            
 
         }
         

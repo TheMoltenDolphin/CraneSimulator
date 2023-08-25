@@ -42,6 +42,8 @@ public abstract class ParentObjectsOnPlace : MonoBehaviour
         other.transform.position = gameObject.transform.position;
         other.transform.rotation = gameObject.transform.rotation;
         other.gameObject.layer = 9;
+        other.transform.SetParent(GameObject.Find("VagonColliders").transform);
+        Destroy(other.GetComponent<Detail>());
         AudioManager.singleton.PlayAudio("Coin");
         gameObject.SetActive(false);
 

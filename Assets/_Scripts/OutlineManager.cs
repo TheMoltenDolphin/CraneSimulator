@@ -19,7 +19,7 @@ public class OutlineManager : MonoBehaviour
 
     [Header("Коллайдеры")]
     [SerializeField] private cart[] cartScript;
-    [SerializeField] private FinishedWagon cisternScript;
+    public FinishedWagon cisternScript;
     [SerializeField] private VagonFame connectorScript;
 
 

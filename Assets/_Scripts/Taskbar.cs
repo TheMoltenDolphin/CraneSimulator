@@ -44,7 +44,8 @@ public class Taskbar : MonoBehaviour
     {
         errorText.text = text;
         ErrorObj.SetActive(true);
-        yield return new WaitForSeconds(3);
+        AudioManager.singleton.PlayAudio("Error");
+        yield return new WaitForSeconds(4);
         ErrorObj.SetActive(false);
     }
 }

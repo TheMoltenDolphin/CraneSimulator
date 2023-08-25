@@ -9,7 +9,7 @@ public class StarterFinisher : MonoBehaviour
     [SerializeField] private GameObject TrainPrefab;
     [SerializeField] private Transform PrefabDest;
     [SerializeField] private ParticleSystem BigSmoke;
-    
+     private Animator VagonAnim;
     private GameObject NewTrain;
 
     private void Awake()
@@ -40,7 +40,7 @@ public class StarterFinisher : MonoBehaviour
         }
         GameObject.Find("HelperCanv").SetActive(true);
         AudioManager.singleton.PlayAudio("LongSteam");
-        yield return new WaitForSeconds(BigSmoke.main.duration / 2);
+        yield return new WaitForSeconds(BigSmoke.main.duration / 4);
         for(int i = 0; i < coins.Length; i++)
         {
             coins[i].SetCoinDefaultState();
@@ -53,10 +53,16 @@ public class StarterFinisher : MonoBehaviour
     [ContextMenu("FinishGame")]
     public void EndGame()
     {
-        GameObject.FindWithTag("StartBtn").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.Find("HelperCanv").SetActive(false);
         CraneRotation.singleton.IsGamePlaying = false;
+        VagonAnim = OutlineManager.singleton.cisternScript.transform.parent.GetComponent<Animator>();
+        VagonAnim.SetTrigger("Out");
     }
 
-    
+    IEnumerator finisher()
+    {
+        yield return new WaitForSeconds(15);
+        GameObject.FindWithTag("StartBtn").transform.GetChild(0).gameObject.SetActive(true);
+
+    }
 }

@@ -3,18 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UltimateXR.Extensions.Unity;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ClawScript : MonoBehaviour
 {
     [SerializeField] private bool IsBig;
-    [SerializeField] private Transform CartPivot;
     [SerializeField] private Transform WheelPivot;
 
 
-    bool stateup;
+    bool stateup = true;
     bool Go;
     private void OnTriggerStay(Collider collision)
     {
@@ -28,12 +26,9 @@ public class ClawScript : MonoBehaviour
                     if (!CraneRotation.singleton.ClawList[1].IsCatched)
                     {
                         CraneRotation.singleton.IsAnimated = true;
-                        collision.GetComponent<Rigidbody>().isKinematic = true;
-                        collision.gameObject.transform.position = WheelPivot.position;
-                        collision.gameObject.transform.rotation = WheelPivot.rotation;
+                       // collision.GetComponent<Rigidbody>().isKinematic = true;
                         collision.gameObject.transform.SetParent(WheelPivot);
-                        collision.gameObject.AddComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
-                        collision.GetComponent<Rigidbody>().isKinematic = false;
+                        collision.gameObject.transform.localPosition = Vector3.zero;
                         CraneRotation.singleton.CacthObject(collision.gameObject.GetComponent<Rigidbody>(), false);
                         collision.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     }
@@ -60,24 +55,18 @@ public class ClawScript : MonoBehaviour
                 }
             }
         }
-
-        else if (collision.gameObject.CompareTag("Untagged") && (collision.gameObject.layer != 7 | collision.gameObject.layer != 9))
-        {
-            Taskbar.singleton.PrintError("Вы столкнулись с посторонней поверхностью!!!");
-        }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Untagged"))
         {
-            OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
-            if (IsBig)
+            if (IsBig && !other.gameObject.CompareTag("WheelSet"))
             {
-                CraneRotation.singleton.ClawList[0].IsColliding = true;
+                OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
             }
-            else if (!IsBig)
+            else if (!IsBig && other.gameObject.CompareTag("WheelSet"))
             {
-                CraneRotation.singleton.ClawList[1].IsColliding = true;
+                OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
             }
         }
 
@@ -86,17 +75,60 @@ public class ClawScript : MonoBehaviour
     {
          if (!other.gameObject.CompareTag("Untagged"))
          {
-            OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
-            if (IsBig)
+            if (IsBig && !other.gameObject.CompareTag("WheelSet"))
             {
-                CraneRotation.singleton.ClawList[0].IsColliding = false;
+                OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
             }
-            else if (!IsBig)
+            else if (!IsBig & other.gameObject.CompareTag("WheelSet"))
             {
-                CraneRotation.singleton.ClawList[1].IsColliding = false;
+                OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
             }
-         }
+        }
 
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!IsBig )
+        {
+            if (collision.gameObject.layer != 9)
+            {
+                if(collision.gameObject.layer != 10)
+                {
+                    CraneRotation.singleton.IsCollided = true;
+                    Taskbar.singleton.PrintError("Зафиксировано столкновение! \n Поднимите крюк и постарайтесь больше не врезаться в посторонние объекты!");
+                    print(collision.gameObject.name);
+                }
+            }
+
+        }
+        else if (IsBig)
+        {
+            if(collision.gameObject.layer != 9)
+            {
+                if(collision.gameObject.layer != 11)
+                {
+                    print(collision.gameObject.name);
+                    CraneRotation.singleton.IsCollided = true;
+                    Taskbar.singleton.PrintError("Зафиксировано столкновение! \n Поднимите магнит и постарайтесь больше не врезаться в посторонние объекты!");
+                }
+            }
+
+
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (!IsBig && (collision.gameObject.layer == 0 | !collision.gameObject.CompareTag("WheelSet")))
+        {
+            CraneRotation.singleton.IsCollided = false;
+        }
+        else if (IsBig && (collision.gameObject.layer == 0 | collision.gameObject.CompareTag("WheelSet")))
+        {
+            CraneRotation.singleton.IsCollided = false;
+        }
     }
     private void FixedUpdate()
     {
