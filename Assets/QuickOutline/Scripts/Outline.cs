@@ -299,8 +299,8 @@ public class Outline : MonoBehaviour {
         switch (outlineMode) {
       case Mode.OutlineAll:
         outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
-        outlineOutlineMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
+        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
+        outlineOutlineMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
         outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
         outlineOutlineMaterial.SetFloat("_OutlineWidth", outlineWidth);
 
@@ -310,7 +310,7 @@ public class Outline : MonoBehaviour {
         outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
         outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
         outlineOutlineMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Never);
-                outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
         break;
 
       case Mode.OutlineHidden:
