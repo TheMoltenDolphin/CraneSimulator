@@ -10,10 +10,18 @@ public class ClawScript : MonoBehaviour
 {
     [SerializeField] private bool IsBig;
     [SerializeField] private Transform WheelPivot;
+     float Zpos;
 
 
     bool stateup = true;
     bool Go;
+
+
+
+    private void Start()
+    {
+        Zpos = transform.localPosition.z;
+    }
     private void OnTriggerStay(Collider collision)
     {
         if (!collision.gameObject.CompareTag("Untagged") && Go)
@@ -132,6 +140,7 @@ public class ClawScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Zpos);
         if (CraneRotation.singleton.buttonTouch.stateUp)
         {
             stateup = true;
