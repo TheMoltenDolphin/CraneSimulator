@@ -138,6 +138,7 @@ PlayerSettings:
   bundleVersion: 0.1
   preloadedAssets:
   - {fileID: 11400000, guid: 8183a54fa62cbce46a6e122b3f397055, type: 2}
+  - {fileID: -8428312380378075637, guid: 390fa92f21c880c44949d5db5c97030d, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -157,12 +158,12 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.TheMoltenDolphinCompany.---------------------------------------------------------------------
+    Standalone: com.TheMoltenDolphinCompany
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 0
@@ -434,7 +435,7 @@ PlayerSettings:
     m_APIs: 0b000000
     m_Automatic: 0
   - m_BuildTarget: WindowsStandaloneSupport
-    m_APIs: 02000000
+    m_APIs: 0200000012000000
     m_Automatic: 0
   m_BuildTargetVRSettings: []
   openGLRequireES31: 0
