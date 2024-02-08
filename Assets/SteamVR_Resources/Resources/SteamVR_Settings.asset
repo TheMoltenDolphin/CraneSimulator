@@ -20,7 +20,7 @@ MonoBehaviour:
   inputUpdateMode: 2
   poseUpdateMode: 8
   activateFirstActionSetOnStart: 1
-  editorAppKey: application.generated.unity.myproject1.exe
+  editorAppKey: "application.generated.unity.\u0441\u0438\u043C\u0443\u043B\u044F\u0442\u043E\u0440\u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F\u043C\u043E\u0441\u0442\u043E\u0432\u044B\u043C\u043A\u0440\u0430\u043D\u043E\u043C.exe"
   autoEnableVR: 1
   legacyMixedRealityCamera: 1
   mixedRealityCameraPose:

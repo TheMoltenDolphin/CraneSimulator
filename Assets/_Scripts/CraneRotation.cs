@@ -126,8 +126,10 @@ public class CraneRotation : MonoBehaviour
     public IEnumerator Catcher(Rigidbody Object, bool IsBig)
     {
         IsAnimated = true;
+        Object.isKinematic = false;
         if (IsBig)
         {
+            
             ClawList[0].Particles.Play();
             //ClawList[0].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
             yield return new WaitForSeconds(ClawAnim.length * 0.8f);
@@ -140,13 +142,11 @@ public class CraneRotation : MonoBehaviour
         {
             ClawList[1].Particles.Play();
             //ClawList[1].ClawRB.GetComponent<Animator>().SetTrigger("Go!");
+            yield return new WaitForSeconds(ClawAnim.length * 0.8f);
             Object.AddComponent<FixedJoint>();
             Object.GetComponent<FixedJoint>().connectedBody = ClawList[1].ClawRB;
-            yield return new WaitForSeconds(ClawAnim.length * 0.8f);
             ClawList[1].CatchedObject = Object.gameObject.GetComponent<Rigidbody>();
             OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
-            Object.isKinematic = false;
-
         }
         Object.useGravity = false;
         OutlineManager.singleton.SetCatchedOutline(Object.GetComponent<Outline>());
@@ -186,8 +186,8 @@ public class CraneRotation : MonoBehaviour
             
 
         }
-        
         IsAnimated = false;
+        IsCollided = false;
 
     }
     [ContextMenu("Отпускание!")]

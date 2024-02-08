@@ -71,10 +71,13 @@ public class ClawScript : MonoBehaviour
             if (IsBig && !other.gameObject.CompareTag("WheelSet"))
             {
                 OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
+                other.GetComponent<Rigidbody>().isKinematic = true;
             }
             else if (!IsBig && other.gameObject.CompareTag("WheelSet"))
             {
                 OutlineManager.singleton.SetGreenOutline(other.gameObject.GetComponent<Outline>());
+                other.GetComponent<Rigidbody>().isKinematic = true;
+
             }
         }
 
@@ -86,10 +89,14 @@ public class ClawScript : MonoBehaviour
             if (IsBig && !other.gameObject.CompareTag("WheelSet"))
             {
                 OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
+                other.GetComponent<Rigidbody>().isKinematic = false;
+
             }
             else if (!IsBig & other.gameObject.CompareTag("WheelSet"))
             {
                 OutlineManager.singleton.SetEmptyOutline(other.gameObject.GetComponent<Outline>());
+               other.GetComponent<Rigidbody>().isKinematic = false;
+
             }
         }
 
@@ -98,7 +105,7 @@ public class ClawScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!IsBig )
+        if(!IsBig)
         {
             if (collision.gameObject.layer != 9)
             {
