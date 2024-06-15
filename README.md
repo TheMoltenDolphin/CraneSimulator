@@ -1,2 +1,3 @@
 # CraneSimulator
-[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/waZApDfawa8)
+[![Watch the video](https://img.youtube.com/vi/waZApDfawa8/maxresdefault.jpg
+)](https://youtu.be/waZApDfawa8)
